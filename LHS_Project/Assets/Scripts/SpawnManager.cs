@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    public static bool bossSpawned = false;
+
     public GameObject[] enemies;
     public GameObject AsteroidPrefab;
+    public GameObject BossPrefab;
 
     public float xMin, xMax, yPos;
     public float startWait = 3.0f;
@@ -21,10 +24,15 @@ public class SpawnManager : MonoBehaviour
 
     void Update()
     {
-        if (GameController.Instance.gameClear)
+        if (GameController.Instance.gameClear || bossSpawned)
         {
             CancelInvoke("SpawnAsteroid");
             StopCoroutine(SpawnEnemies());
+        }
+        if(GameController.score >= 100 && !bossSpawned)
+        {
+            bossSpawned = true;
+            SpawnBoss();
         }
     }
 
@@ -32,6 +40,12 @@ public class SpawnManager : MonoBehaviour
     {
         randX = Random.Range(xMin, xMax);
         Instantiate(AsteroidPrefab, new Vector2(randX, yPos), Quaternion.identity);
+    }
+
+    void SpawnBoss()
+    {
+        bossSpawned = true;
+        Instantiate(BossPrefab, new Vector2(0, yPos), Quaternion.identity);
     }
 
     IEnumerator SpawnEnemies()

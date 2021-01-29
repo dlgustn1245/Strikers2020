@@ -14,7 +14,7 @@ public class AsteroidController : MonoBehaviour
 
     void Update()
     {
-        if (GameController.Instance.gameOver)
+        if (GameController.Instance.gameOver || SpawnManager.bossSpawned)
         {
             Destroy(gameObject);
         }

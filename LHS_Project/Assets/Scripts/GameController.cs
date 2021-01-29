@@ -6,12 +6,22 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public static GameController Instance;
+    public static GameController Instance
+    {
+        get
+        {
+            if (!instance) return null;
+            return instance;
+        }
+    }
+    private static GameController instance = null;
+    
     public static int score = 0;
 
     public GameObject gameoverText;
     public GameObject readyText;
     public GameObject clearText;
+    public GameObject bossText;
 
     public Text scoreText;
     public Text healthText;
@@ -19,22 +29,22 @@ public class GameController : MonoBehaviour
     public bool gameOver = false;
     public bool gameClear = false;
 
-    private void Awake()
+    int cnt = 0;
+
+    void Awake()
     {
-        if(!Instance)
+        if (!instance)
         {
-            Instance = this;
+            instance = this;
+            DontDestroyOnLoad(gameObject); 
         }
-        else if (Instance)
-        {
-            Destroy(gameObject);
-        }
+        else Destroy(gameObject);
     }
 
     void Start()
     {
-        readyText.SetActive(false);
         StartCoroutine(ShowReadyText());
+        StartCoroutine(ShowBossText());
     }
 
     void Update()
@@ -43,7 +53,8 @@ public class GameController : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        if(score >= 1000)
+        
+        if (BossController.bossDead)
         {
             StageClear();
         }
@@ -78,12 +89,26 @@ public class GameController : MonoBehaviour
 
     IEnumerator ShowReadyText()
     {
-        int cnt = 0;
         while(cnt < 3)
         {
             readyText.SetActive(true);
             yield return new WaitForSeconds(0.5f);
             readyText.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+
+            ++cnt;
+        }
+        cnt = 0;
+    }
+
+    IEnumerator ShowBossText()
+    {
+        yield return new WaitUntil(() => score >= 100);
+        while (cnt < 3)
+        {
+            bossText.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            bossText.SetActive(false);
             yield return new WaitForSeconds(0.5f);
 
             ++cnt;

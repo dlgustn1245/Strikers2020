@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
     public GameObject explosionPrefab;
 
     float horizontal, vertical;
-    float shootCooldown;
     float invincibleCooldown;
+    float startWait = 3.0f;
 
     bool isInvincible = false;
 
@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         render = gameObject.GetComponent<Renderer>();
+
+        StartCoroutine(ShootLaser());
     }
 
     void Update()
@@ -49,7 +51,6 @@ public class PlayerController : MonoBehaviour
                 isInvincible = false;
             }
         }
-        ShootLaser();
     }
 
     void FixedUpdate()
@@ -74,7 +75,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Bomb"))
+        if (collision.gameObject.CompareTag("Bomb") || collision.gameObject.CompareTag("Bullet"))
         {
             ChangeHealth(-1);
         }
@@ -105,17 +106,7 @@ public class PlayerController : MonoBehaviour
         else return;
 
         Destroy(collision.gameObject);
-    }
-
-    void ShootLaser()
-    {
-        if (shootCooldown >= shootDelay)
-        {
-            Instantiate(laser, rb2d.position + Vector2.up * 1.2f, Quaternion.identity);
-            shootCooldown = 0;
-        }
-        shootCooldown += Time.deltaTime;
-    }
+    }    
 
     void ChangeHealth(int amount)
     {
@@ -124,6 +115,7 @@ public class PlayerController : MonoBehaviour
             if (isInvincible) return;
 
             StartCoroutine(OnDamage());
+            StopCoroutine(ShootLaser());
 
             isInvincible = true;
             invincibleCooldown = timeInvincible;
@@ -157,6 +149,17 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.25f);
 
             ++cnt;
+        }
+    }
+
+    IEnumerator ShootLaser()
+    {
+        yield return new WaitForSeconds(startWait);
+        while (true)
+        {
+            Instantiate(laser, rb2d.position + Vector2.up * 1.2f, Quaternion.identity);
+
+            yield return new WaitForSeconds(shootDelay);
         }
     }
 }

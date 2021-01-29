@@ -18,6 +18,7 @@ public class BackgroundScroll : MonoBehaviour
         {
             scrollSpeed = 0.0f;
         }
+
         float offsetY = material.mainTextureOffset.y + scrollSpeed * Time.deltaTime;
         Vector2 groundOffset = new Vector2(0.0f, offsetY);
         material.mainTextureOffset = groundOffset;

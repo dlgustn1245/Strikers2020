@@ -20,7 +20,7 @@ public class ItemDrop : MonoBehaviour
 
     void Update()
     {
-        if (GameController.Instance.gameOver || GameController.Instance.gameClear)
+        if (GameController.Instance.gameOver || SpawnManager.bossSpawned)
         {
             Destroy(gameObject);
         }
@@ -44,7 +44,7 @@ public class ItemDrop : MonoBehaviour
 
         rb2d.MovePosition(position);
 
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotate));
+        transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, rotate));
         rotate += 3.0f;
 
         Destroy(gameObject, 6.0f);

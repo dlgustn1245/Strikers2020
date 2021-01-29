@@ -96,7 +96,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35fd7532bb0d2e745910d0d5c81637a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bomb: {fileID: 2057390096827092733, guid: a1d176d080fa1874fae72287c9f40955, type: 3}
   explosionPrefab: {fileID: 7410711703194643236, guid: ed92132fc68bc084cb0f39959b0fa2a4,
     type: 3}
   items:
@@ -106,7 +105,7 @@ MonoBehaviour:
   - {fileID: 3295003232593826389, guid: ef6a91bbf1ef0064fab190aa29d4c1cf, type: 3}
   speed: 2
   score: 50
-  maxStamina: 4
+  maxStamina: 1
 --- !u!50 &3700301700643933246
 Rigidbody2D:
   serializedVersion: 4

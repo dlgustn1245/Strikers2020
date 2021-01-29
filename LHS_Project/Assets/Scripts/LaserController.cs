@@ -33,7 +33,7 @@ public class LaserController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Boss"))
         {
             GameObject flame = Instantiate(flamePrefab, rb2d.position, Quaternion.identity) as GameObject;
             Destroy(flame, 0.8f);
