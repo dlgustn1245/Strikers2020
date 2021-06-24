@@ -22,6 +22,11 @@ public class AsteroidController : MonoBehaviour
 
     void FixedUpdate()
     {
+        AstMove();
+    }
+
+    void AstMove()
+    {
         Vector2 position = rb2d.position;
         position.y -= speed * Time.deltaTime;
 

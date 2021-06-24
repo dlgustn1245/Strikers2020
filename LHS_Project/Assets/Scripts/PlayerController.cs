@@ -55,6 +55,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        Move();
+    }
+
+    void Move()
+    {
         Vector2 position = rb2d.position;
         position.x += speed * horizontal * Time.deltaTime;
         position.y += speed * vertical * Time.deltaTime;
@@ -82,26 +87,17 @@ public class PlayerController : MonoBehaviour
         else if (collision.gameObject.CompareTag("HealthItem"))
         {
             if (currentHealth >= maxHealth) return;
-            else
-            {
-                ChangeHealth(1);
-            }
+            else ChangeHealth(1);           
         }
         else if (collision.gameObject.CompareTag("AttackSpeedItem"))
         {
             if (shootDelay <= 0.25f) return;
-            else
-            {
-                shootDelay -= 0.05f;
-            }
+            else shootDelay -= 0.05f;           
         }
         else if (collision.gameObject.CompareTag("AttackDamageItem"))
         {
             if (currentDamage >= maxDamage) return;
-            else
-            {
-                ++currentDamage;
-            }
+            else ++currentDamage;
         }
         else return;
 
@@ -154,12 +150,12 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator ShootLaser()
     {
-        yield return new WaitForSeconds(startWait);
+        yield return new WaitForSeconds(startWait); //3.0f
         while (true)
         {
             Instantiate(laser, rb2d.position + Vector2.up * 1.2f, Quaternion.identity);
 
-            yield return new WaitForSeconds(shootDelay);
+            yield return new WaitForSeconds(shootDelay); // 0.3f
         }
     }
 }

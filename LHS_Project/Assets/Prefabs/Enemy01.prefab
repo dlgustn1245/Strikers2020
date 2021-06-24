@@ -105,7 +105,7 @@ MonoBehaviour:
   - {fileID: 3295003232593826389, guid: ef6a91bbf1ef0064fab190aa29d4c1cf, type: 3}
   speed: 4
   score: 20
-  maxStamina: 1
+  maxStamina: 2
 --- !u!50 &1816567543946992931
 Rigidbody2D:
   serializedVersion: 4

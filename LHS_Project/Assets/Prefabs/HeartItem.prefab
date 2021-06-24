@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xMin: -2.8
-  xMax: 0.8
+  xMax: 2.8
   yMin: -0.6
   yMax: 7.2
   speed: 3

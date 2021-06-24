@@ -104,7 +104,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 5
+  m_Constraints: 4
 --- !u!60 &4779063906398927327
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -266,10 +266,13 @@ MonoBehaviour:
   bulletPrefab: {fileID: 165755311963401196, guid: 3559c069fcf308542851672c464ab9d0,
     type: 3}
   speed: 1
-  bulletSpeed: 5
+  moveSpeed: 2
+  bulletSpeed: 200
   yPos: 5.5
   maxStamina: 20
-  oneShoting: 6
+  oneShoting: 30
   score: 500
+  xMin: -1.85
+  xMax: 1.85
   startWait: 3
-  shootWait: 1
+  shootWait: 2

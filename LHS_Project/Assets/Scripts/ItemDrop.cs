@@ -28,6 +28,11 @@ public class ItemDrop : MonoBehaviour
 
     void FixedUpdate()
     {
+        ItemMove();
+    }
+
+    void ItemMove()
+    {
         Vector2 position = rb2d.position;
 
         position.x += speed * flagX * Time.deltaTime;

@@ -47,19 +47,6 @@ public class GameController : MonoBehaviour
         StartCoroutine(ShowBossText());
     }
 
-    void Update()
-    {
-        if (gameOver && Input.GetKeyDown("space"))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-        
-        if (BossController.bossDead)
-        {
-            StageClear();
-        }
-    }
-
     public void FighterScored(int num)
     {
         score += num;
