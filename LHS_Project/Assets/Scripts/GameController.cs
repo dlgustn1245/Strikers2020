@@ -47,6 +47,15 @@ public class GameController : MonoBehaviour
         StartCoroutine(ShowBossText());
     }
 
+    void Update()
+    {
+        //if (gameOver && Input.GetKeyDown("space"))
+        //{
+        //    gameOver = false; 
+        //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //}
+    }
+
     public void FighterScored(int num)
     {
         score += num;

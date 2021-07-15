@@ -275,4 +275,4 @@ MonoBehaviour:
   xMin: -1.85
   xMax: 1.85
   startWait: 3
-  shootWait: 2
+  shootWait: 2.5

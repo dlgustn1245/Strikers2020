@@ -52,13 +52,13 @@ public class SpawnManager : MonoBehaviour
     {
         yield return new WaitForSeconds(startWait);
 
-        while (true)
+        while (true) 
         {
-            randX = Random.Range(xMin, xMax + 0.1f);
+            randX = Random.Range(xMin, xMax + 0.1f); 
             GameObject enemy = enemies[Random.Range(0, enemies.Length)];
             Instantiate(enemy, new Vector2(randX, yPos), Quaternion.identity);
 
-            yield return new WaitForSeconds(spawnWait);
+            yield return new WaitForSeconds(spawnWait); 
         }
     }
 }

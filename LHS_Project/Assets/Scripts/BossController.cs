@@ -89,7 +89,6 @@ public class BossController : MonoBehaviour
 
     IEnumerator Shot()
     {
-        float angle = 360 / oneShoting;
         while (true)
         {
             for (int i = 0; i < oneShoting; i++)
@@ -100,7 +99,7 @@ public class BossController : MonoBehaviour
                 Destroy(bullet, 2.0f);
             }
 
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(1.5f);
         }
     }
 }

@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
     public GameObject explosionPrefab;
 
     float horizontal, vertical;
-    float invincibleCooldown;
     float startWait = 3.0f;
+    float bossWait = 3.0f;
 
     bool isInvincible = false;
 
@@ -42,15 +42,6 @@ public class PlayerController : MonoBehaviour
     {
         horizontal = Input.GetAxis("Horizontal");
         vertical = Input.GetAxis("Vertical");
-
-        if (isInvincible)
-        {
-            invincibleCooldown -= Time.deltaTime;
-            if (invincibleCooldown <= 0)
-            {
-                isInvincible = false;
-            }
-        }
     }
 
     void FixedUpdate()
@@ -111,10 +102,6 @@ public class PlayerController : MonoBehaviour
             if (isInvincible) return;
 
             StartCoroutine(OnDamage());
-            StopCoroutine(ShootLaser());
-
-            isInvincible = true;
-            invincibleCooldown = timeInvincible;
 
             currentDamage = 1;
             shootDelay = 0.5f;
@@ -134,9 +121,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator OnDamage()
+    IEnumerator OnDamage() 
     {
         int cnt = 0;
+        isInvincible = true; 
         while(cnt < 4)
         {
             render.material.color = new Color(255, 255, 255, 0);
@@ -144,18 +132,24 @@ public class PlayerController : MonoBehaviour
             render.material.color = new Color(1, 1, 1, 1);
             yield return new WaitForSeconds(0.25f);
 
-            ++cnt;
+            ++cnt; 
         }
+        isInvincible = false; 
     }
 
     IEnumerator ShootLaser()
     {
+        bool pauseShoot = false;
         yield return new WaitForSeconds(startWait); //3.0f
         while (true)
         {
+            if (SpawnManager.bossSpawned && !pauseShoot)
+            {
+                yield return new WaitForSeconds(bossWait); //3.0f
+                pauseShoot = true;
+            }
             Instantiate(laser, rb2d.position + Vector2.up * 1.2f, Quaternion.identity);
-
-            yield return new WaitForSeconds(shootDelay); // 0.3f
+            yield return new WaitForSeconds(shootDelay); //0.3f
         }
     }
 }
