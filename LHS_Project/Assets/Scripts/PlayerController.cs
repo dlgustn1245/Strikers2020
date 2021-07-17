@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
         currentHealth = maxHealth;
         render = gameObject.GetComponent<Renderer>();
 
+        GameController.Instance.ScoreReset();
+
         StartCoroutine(ShootLaser());
     }
 
@@ -148,7 +150,7 @@ public class PlayerController : MonoBehaviour
                 yield return new WaitForSeconds(bossWait); //3.0f
                 pauseShoot = true;
             }
-            Instantiate(laser, rb2d.position + Vector2.up * 1.2f, Quaternion.identity);
+            Instantiate(laser, rb2d.position + Vector2.up * 0.8f, Quaternion.identity);
             yield return new WaitForSeconds(shootDelay); //0.3f
         }
     }

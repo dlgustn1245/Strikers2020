@@ -36,7 +36,6 @@ public class GameController : MonoBehaviour
         if (!instance)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); 
         }
         else Destroy(gameObject);
     }
@@ -49,17 +48,22 @@ public class GameController : MonoBehaviour
 
     void Update()
     {
-        //if (gameOver && Input.GetKeyDown("space"))
-        //{
-        //    gameOver = false; 
-        //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //}
+        if ((gameOver || gameClear) && Input.GetKeyDown("space"))
+        {
+            gameOver = true; 
+            SceneManager.LoadScene("GameOverScene");
+        }
     }
 
     public void FighterScored(int num)
     {
         score += num;
-        scoreText.text = "Score : " + score;
+        scoreText.text = "Score : " + score.ToString();
+    }
+
+    public void ScoreReset()
+    {
+        score = 0;
     }
 
     public void FighterDead()

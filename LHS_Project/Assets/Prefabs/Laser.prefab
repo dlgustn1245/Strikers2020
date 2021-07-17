@@ -140,7 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b947c279149b624e84608ee525f7890, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 6
-  yMax: 7
   flamePrefab: {fileID: 6484369525137652046, guid: b7a42af9911935e4a82befb15431b2bd,
     type: 3}
+  speed: 5
